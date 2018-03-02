@@ -4,8 +4,8 @@
 
 
 # reference
-[Shadowsocks Python版一键安装脚本][1]
-[用Google Cloud Platform搭建Shadowsocks服务教程][2]
+- [Shadowsocks Python版一键安装脚本][1]
+- [用Google Cloud Platform搭建Shadowsocks服务教程][2]
 
 [1]: https://shadowsocks.be/1.html
 [2]: http://godjose.com/2017/06/14/new-article/
