@@ -4,7 +4,7 @@
 Return all such possible sentences.
 
 For example, given
-s ="catsanddog",
+s ="catsanddog", 
 dict =["cat", "cats", "and", "sand", "dog"].
 
 A solution is["cats and dog", "cat sand dog"].
