@@ -41,6 +41,31 @@ public:
 # analysis
 >说实话，我还真不大懂这一题，留着慢慢看吧。今后找个机会把这些东西全都整理下来。
 
+## 2018／5/2
+>这道题我有点懂了，这是一个直方图题目的变形，
+例如
+```
+01101
+11010
+01110
+11110
+11111
+```
+先将上面的矩阵转化为：
+```
+01101
+12010
+03110
+14210
+25321
+```
+然后对每一行求直方图的最大面积。
+
 # reference
 [[编程题]maximal-rectangle][1]
+[[LeetCode] 01矩阵中最大矩形 Maximal Rectangle][2]
+[Leetcode Maximal Rectangle][3]
+
 [1]: https://www.nowcoder.com/questionTerminal/b65c0f05e1dc4588b91c615fa7c7ef78
+[2]: https://blog.csdn.net/jiyanfeng1/article/details/8068676
+[3]: https://www.cnblogs.com/easonliu/p/3657489.html
