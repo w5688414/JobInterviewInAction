@@ -17,6 +17,10 @@ The solution set must not contain duplicate triplets.
 class Solution {
 public:
     vector<vector<int> > threeSum(vector<int> &num) {
+        vector<vector<int>> result;
+        if(nums.size()<3){
+            return result;
+        }
         set<vector<int> > res;
         sort(num.begin(),num.end());
         for(int i=0;i+2<num.size();i++){
