@@ -7,44 +7,35 @@ Given[0,1,0,2,1,0,1,3,2,1,2,1], return6.
 
 # codes
 ```
-/**
- * Definition for binary tree
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
 class Solution {
 public:
-    bool isSymmetric(TreeNode *root) {
-        if(root==NULL){
-            return true;
+    int trap(vector<int>& height) {
+        int i=0;
+        int j=height.size()-1;
+        int sum=0;
+        int left_max=0;
+        int right_max=0;
+        while(i<j){
+            left_max=max(left_max,height[i]);
+            right_max=max(right_max,height[j]);
+            if(left_max<right_max){
+                sum+=(left_max-height[i]);
+                i++;
+            }else{
+                sum+=(right_max-height[j]);
+                j--;
+            }
         }
-        return isEqual(root->left,root->right);
-    }
-    bool isEqual(TreeNode *left,TreeNode *right){
-        if(left==NULL&&right==NULL){
-            return true;
-        }
-        if(left==NULL||right==NULL){
-            return false;
-        }
-        if(left->val!=right->val){
-            return false;
-        }
-        return isEqual(left->left,right->right)&&isEqual(left->right,right->left);
+        return sum;
     }
 };
-
 ```
 
 # analysis
->递归，把递归的逻辑结构理清楚就行了。
+>索引i从左到右，索引j从右往左，遍历的时候寻找左右两边的最大值，如果左边的最大值小于右边的最大值，左边进行操作；如果左边的最大值大于等于右边的最大值，右边进行操作。知道i>j时终止。
 # reference
-[[编程题]symmetric-tree][1]
+[42. Trapping Rain Water][1]
 
-[1]: https://www.nowcoder.com/questionTerminal/1b0b7f371eae4204bc4a7570c84c2de1
+[1]: https://leetcode.com/problems/trapping-rain-water/discuss/17391/Share-my-short-solution.
 
 

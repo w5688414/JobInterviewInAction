@@ -51,6 +51,50 @@ private:
     }
 };
 ```
+## version 2
+```
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<TreeNode*> generateTrees(int n) {
+        vector<TreeNode*> result;
+        if(n<1){
+            return result;
+        }
+        result=solve(1,n);
+        return result;
+    }
+    
+    vector<TreeNode*> solve(int start,int n){
+        vector<TreeNode*> subTree;
+        if(start>n){
+            subTree.push_back(NULL);
+            return subTree;
+        }
+        for(int i=start;i<=n;i++){
+            vector<TreeNode*> leftSubs=solve(start,i-1);
+            vector<TreeNode*> rightSubs=solve(i+1,n);
+            for(auto left:leftSubs){
+                for(auto right:rightSubs){
+                    TreeNode* node=new TreeNode(i);
+                    node->left=left;
+                    node->right=right;
+                    subTree.push_back(node);
+                }
+            }
+        }
+        return subTree;
+    }
+};
+```
 
 # analysis
 >还是用的递归，把所有可能的左子树和右子树建立起来，然后进行左右子树匹配。见代码注释

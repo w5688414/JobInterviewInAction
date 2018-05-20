@@ -26,11 +26,75 @@ If the current candidate does not exist in all words' prefix, you could stop bac
 
 # codes
 ```
+class TrieNode{
+public:
+    int isWord;
+    vector<TrieNode*> next;
+    TrieNode(){
+        isWord=-1;
+        next=vector<TrieNode*>(26,NULL);
+    }
+};
 
+class Solution {
+private:
+    TrieNode* root;
+public:
+    vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
+        root=new TrieNode();
+        buildTree(words,root);
+        set<string> res;
+        for(int i=0;i<board.size();i++){
+            for(int j=0;j<board[i].size();j++){
+                findWords(res,board,words,root,i,j);
+            }
+        }
+        return vector<string>(res.begin(),res.end());
+        
+    }
+    
+    void findWords(set<string>& res, vector<vector<char>>& board, vector<string>& words, TrieNode* node, int r, int c){
+        if(board[r][c] == '.' || !node->next[board[r][c]-'a']) return;
+        TrieNode* after=node->next[board[r][c]-'a'];
+        if(after->isWord>-1){
+            res.insert(words[after->isWord]);
+        }
+        char letter=board[r][c];
+        board[r][c]='.';
+        if(r-1>=0){
+            findWords(res,board,words,after,r-1,c);
+        }
+        if(r+1<board.size()){
+            findWords(res,board,words,after,r+1,c);
+        }
+        if(c-1>=0){
+            findWords(res,board,words,after,r,c-1);
+        }
+        if(c+1<board[0].size()){
+            findWords(res,board,words,after,r,c+1);
+        }
+        board[r][c]=letter;
+        
+    }
+    
+    void buildTree(vector<string>& words,TrieNode* root){
+        TrieNode* cur;
+        for(int i=0;i<words.size();i++){
+            cur=root;
+            for(char c:words[i]){
+                if(!cur->next[c-'a']){
+                    cur->next[c-'a']=new TrieNode();
+                }
+                cur=cur->next[c-'a'];
+            }
+            cur->isWord=i;
+        }
+    }
+};
 ```
 
 # analysis
->今晚太晚了，明天再看吧，我怕猝死。
+>首先建立了一个trie的树，然后在这个字典树里面查找。
 
 # reference
 [212. Word Search II][1]

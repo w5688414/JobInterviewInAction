@@ -25,6 +25,23 @@ public:
     }
 };
 ```
+```
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        vector<bool> dp(s.size()+1,false);
+        dp[0]=true;
+        for(int i=0;i<s.length();i++){
+            for(int j=i;j<s.length()&&dp[i];j++){
+                if(find(wordDict.begin(),wordDict.end(),s.substr(i,j-i+1))!=wordDict.end()){
+                    dp[j+1]=true;
+                }
+            }
+        }
+        return dp[s.length()];
+    }
+};
+```
 
 # analysis
 >dp[i] 表示源串的前i个字符可以满足分割，那么 dp[ j ] 满足分割的条件是存在k 使得 dp [k] && substr[k,j]在字典里。
