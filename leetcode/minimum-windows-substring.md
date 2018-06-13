@@ -44,7 +44,6 @@ public:
                         //舍弃窗口左边字符串，继续移动窗口
                         Tmap[S[left]]++;
                         if(Tmap[S[left]]>0){  //如果左边连续相同，则count不递减，窗口需要继续向右移动
-                        {
                             count--;
                         }
                     }
@@ -61,6 +60,7 @@ public:
 # analysis
 >这道题目我也做不出来，大概是人老了吧，开始left=0，right向后移动，Tmap是T的字符计数键值对，
 >我们用一个count来计算截取的子串是否合法，当count==T.size，说明截取的子串已经包含所给定的子串，然后我们移动left找最小的子串
+
 
 # reference
 [[编程题]minimum-window-substring][1]

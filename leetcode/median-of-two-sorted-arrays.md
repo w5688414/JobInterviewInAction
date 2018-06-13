@@ -123,6 +123,50 @@ public:
        
 };
 ```
+```
+// brute force
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        if(nums1.size()==0){
+            return medianArray(nums2);
+        }
+        if(nums2.size()==0){
+            return medianArray(nums1);
+        }
+        vector<double> nums3;
+        int m=nums1.size()+nums2.size();
+        int mid=m/2;
+        int flag=!(m%2);
+        int n1=0;
+        int n2=0;
+        for(int i=0;i<m;i++){
+            double a= n1<nums1.size() ? nums1[n1]:INT_MAX;
+            double b=n2<nums2.size() ? nums2[n2]:INT_MAX;
+            if(a<b){
+                nums3.push_back(a);
+                n1++;
+            }else{
+                nums3.push_back(b);
+                n2++;
+            }
+            if(i==mid){
+                break;
+            }
+        }
+        return (nums3[mid]+nums3[mid-flag])/2.0;
+        
+    }
+    double medianArray(vector<int>& nums){
+        int n=nums.size();
+        if(n%2==1){
+            return nums[n/2];
+        }else{
+            return (nums[n/2]+nums[n/2-1])/2.0;
+        }
+    }
+};
+```
 
 # analysis
 >归并排序+求中位数，不过需要O(m+n)的空间复杂度。另一种方法我还是每多看明白，用了递归的思路，我也写不出来，拿出来观摩一下，这是符合条件的最优解。
@@ -136,9 +180,14 @@ public:
     k - k / 2小元素，于是得到了数据规模变小的同类问题，递归解决
     如果 k / 2 大于某数列个数，所求元素必然不在另一数列的前k / 2个元素中，同上操作就好。
 
+- brute force
+最后一个解法，就是常规的归并排序的变体，与归并排序不一样的是，我们只归并到mid位置，就不往下归并了，由于归并排序需要数组，因此空间复杂度为O((m+n)/2)，时间复杂度为O(m+n)
+
 # reference
 [[编程题]median-of-two-sorted-arrays][1]
 [leetcode之 median of two sorted arrays][2]
+[《LeetBook》leetcode题解(4): Median of Two Sorted Arrays[H]——两个有序数组中值问题][3]
 
 [1]: https://www.nowcoder.com/questionTerminal/82c11b9392b14f3abfbf257f79a76025
 [2]: https://blog.csdn.net/yutianzuijin/article/details/11499917/
+[3]: https://blog.csdn.net/hk2291976/article/details/51107543

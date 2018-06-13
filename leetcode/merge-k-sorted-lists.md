@@ -107,4 +107,7 @@ public:
 
 # reference
 [[LeetCode] Merge k Sorted Lists 合并k个有序链表][1]
+[23. Merge k Sorted Lists][2]
+
 [1]:https://www.cnblogs.com/grandyang/p/4606710.html
+[2]: https://leetcode.com/problems/merge-k-sorted-lists/solution/
