@@ -26,14 +26,32 @@ public:
     }
   
 };
-
+```
+```
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        vector<int> dp(nums.size(),0);
+        dp[0]=nums[0];
+        for(int i=1;i<nums.size();i++){
+            dp[i]=max(dp[i-1],nums[i-1])-1;
+            if(dp[i]<0){
+                return false;
+            }
+        }
+        return dp[nums.size()-1]>=0;
+    }
+};
 ```
 
 # analysis
 >分析见注释
-
+第二个解法是动态规划的解法，dp[i]表示到达i时剩余的步数，当前位置的剩余步数和当前位置的跳力较大的那个数决定了当前能到的最远距离。而下一个位置的剩余步数就等于较大值减去1，因为需要花费一个跳力到达下一个位置。状态转移方程为：
+dp[i]=max(dp[i-1],nums[i-1])-1;
 
 # reference
 [[编程题]jump-game][1]
+[[LeetCode] Jump Game 跳跃游戏][2]
 
 [1]: https://www.nowcoder.com/questionTerminal/a2d856f493424a748bb7c9c1126e8d8d
+[2]: http://www.cnblogs.com/grandyang/p/4371526.html
