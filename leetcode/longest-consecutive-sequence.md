@@ -36,6 +36,34 @@ public:
 };
 
 ```
+```
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        unordered_set<int> hashSet(nums.begin(),nums.end());
+        int res=0;
+        for(int val:nums){
+            if(!hashSet.count(val)){
+                continue;
+            }
+            hashSet.erase(val);
+            int pre=val-1;
+            int next=val+1;
+            while(hashSet.count(pre)){
+                hashSet.erase(pre);
+                pre--;
+            }
+            while(hashSet.count(next)){
+                hashSet.erase(next);
+                next++;
+            }
+            res=max(res,next-pre-1);
+        }
+        return res;
+    }
+};
+
+```
 
 # analysis
 >首先建立一个hash表，然后初始化存储所有的数据元素。遍历数组，然后去找相关的hash表的值，如果找到了，就删除，并且重复遍历其相邻的hash表的值。就行了
