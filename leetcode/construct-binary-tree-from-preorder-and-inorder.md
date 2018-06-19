@@ -45,5 +45,7 @@ public:
 
 # reference
 [[编程题]construct-binary-tree-from-preorder-and-inorder-traversal][1]
+[[LeetCode] Construct Binary Tree from Preorder and Inorder Traversal 由先序和中序遍历建立二叉树][2]
 
 [1]: https://www.nowcoder.com/questionTerminal/0ee054a8767c4a6c96ddab65e08688f4
+[2]: https://www.cnblogs.com/grandyang/p/4296500.html

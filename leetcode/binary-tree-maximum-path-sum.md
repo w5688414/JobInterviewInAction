@@ -28,7 +28,6 @@ private:
     int max_value=INT_MIN;
 public:
     int maxPathSum(TreeNode *root) {
-        int sum=0;
         preorder(root);
         return max_value;
     }
