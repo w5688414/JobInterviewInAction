@@ -14,4 +14,5 @@
 [13].数据挖掘-离群点检测. https://blog.csdn.net/u013153546/article/details/51291815
 [14].2017秋招面试总结-计算机视觉/深度学习算法. https://www.nowcoder.com/discuss/66114?type=0&order=0&pos=5&page=1
 [15].面试：机器学习--推荐算法. https://blog.csdn.net/u013713010/article/details/44905669
+[16].说说春招实习的京东面试，算法岗. https://www.nowcoder.com/discuss/75301?type=0&order=0&pos=136&page=1
 

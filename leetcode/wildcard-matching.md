@@ -56,6 +56,31 @@ public:
 };
 ```
 
+```
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int m=s.length();
+        int n=p.length();
+        vector<vector<bool>> dp(m+1,vector<bool>(n+1,false));
+        dp[0][0]=true;
+        for(int i=1;i<=n;i++){
+            if(p[i-1]=='*') dp[0][i]=dp[0][i-1];
+        }
+        for(int i=1;i<=m;i++){
+            for(int j=1;j<=n;j++){
+                if(s[i-1]==p[j-1]||p[j-1]=='?'){
+                    dp[i][j]=dp[i-1][j-1];
+                }else if(p[j-1]=='*'){
+                    dp[i][j]=dp[i-1][j]||dp[i][j-1];
+                }
+            }
+        }
+        return dp[m][n];
+    }
+};
+```
+
 # analysis
 >想了一下还是用动态规划来实现吧，dp[i][j]表示s[i-1]与p[j-1]是否匹配。
 递推关系式：
@@ -64,7 +89,11 @@ public:
 初始状态：s="", p=""应该返回true, s="", p="*"应该返回true, 其他初始状态如：s="", p="ab*"应该返回false
  */
 
+ 第二个是C++版本的，看起来更好看一点。
+
 # reference
 [[编程题]wildcard-matching][1]
+[[LeetCode] Wildcard Matching 外卡匹配][2]
 
 [1]: https://www.nowcoder.com/questionTerminal/e96f1a44d4e44d9ab6289ee080099322
+[2]: http://www.cnblogs.com/grandyang/p/4401196.html
