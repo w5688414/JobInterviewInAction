@@ -6,30 +6,25 @@
 class Solution {
 public:
     int divide(int dividend, int divisor) {
-        int count=0;
-        int sum=0;
-        bool flag=false;
-        if(divisor==0){
-            return -1;
-        }
-        if((dividend<0&&divisor>0)||(dividend>0&&divisor<0)){
-            flag=true;
-        }
+        if(divisor==0||(dividend==INT_MIN&&divisor==-1)) return INT_MAX;
         long long m=abs((long long)dividend);
         long long n=abs((long long)divisor);
+        int sign=1;
+        if(dividend<0^divisor<0){
+            sign=-1;
+        }
+        if(n==1) return m*sign;
+        long long  res=0;
         while(m>=n){
-            long long t=n,i=1;
-            while(t<<1<m){
-                t=t<<1;
-                i=i<<1;
+            long long t=n,p=1;
+            while(m>=(t<<1)){
+                t<<=1;
+                p<<=1;
             }
+            res+=p;
             m-=t;
-            count+=i;
         }
-        if(flag){
-            return -count;
-        }
-        return count> INT_MAX ? INT_MAX:count;
+        return res*sign;
     }
 };
 ```
@@ -42,5 +37,8 @@ public:
 # reference
 
 [LeetCode --- 29. Divide Two Integers][1]
+[[LeetCode] Divide Two Integers 两数相除][2]
 
 [1]: https://blog.csdn.net/makuiyu/article/details/43417749
+[2]: http://www.cnblogs.com/grandyang/p/4431949.html
+

@@ -16,28 +16,25 @@ class Solution {
 public:
     string countAndSay(int n) {
         string ans;
-        if(n<=0){
-            return ans;
-        }
         ans="1";
         for(int i=1;i<n;i++){
-            helper(ans);
+            solve(ans);
         }
         return ans;
     }
-    void helper(string &ans){
-        string temp="";
+    void solve(string &ans){
+        string tmp="";
         int count=1;
         for(int i=0;i<ans.size();i++){
             if(i+1<ans.size()&&ans[i]==ans[i+1]){
                 count++;
             }else{
                 char ch=count+'0';
-                temp=temp+ch+ans[i];
+                tmp=tmp+ch+ans[i];
                 count=1;
             }
         }
-        ans=temp;
+        ans=tmp;
     }
 };
 ```
