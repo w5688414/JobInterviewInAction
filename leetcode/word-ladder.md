@@ -64,7 +64,37 @@ public:
         return count;
     }
 };
+```
 
+```
+class Solution {
+public:
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+        unordered_set<string> dict(wordList.begin(),wordList.end());
+        unordered_map<string,int> m;
+        queue<string> q;
+        m[beginWord]=1;
+        q.push(beginWord);
+        while(!q.empty()){
+            string word=q.front();
+            q.pop();
+            for(int i=0;i<word.size();i++){
+                string newWord=word;
+                for(char ch='a';ch<='z';ch++){
+                    newWord[i]=ch;
+                    if(dict.count(newWord)&&newWord==endWord){
+                        return m[word]+1;
+                    }
+                    if(dict.count(newWord)&&!m.count(newWord)){
+                        q.push(newWord);
+                        m[newWord]=m[word]+1;
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+};
 ```
 
 # analysis
@@ -72,5 +102,7 @@ public:
 
 # reference
 [[编程题]word-ladder][1]
+[[LeetCode] Word Ladder 词语阶梯][2]
 
 [1]: https://www.nowcoder.com/questionTerminal/bd75ae43ff7148548eb4701550df2714
+[2]: http://www.cnblogs.com/grandyang/p/4539768.html

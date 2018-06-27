@@ -15,20 +15,21 @@ For the purpose of this problem, we define empty string as valid palindrome.
 class Solution {
 public:
     bool isPalindrome(string s) {
-        if(s=="")
-            return true;
-        int begin=0;
-        int end=s.size()-1;
-        while(begin<=end){
-            while(begin<end&&!isalnum(s[begin])){
-                begin++;
+        int i=0;
+        int j=s.length()-1;
+        while(i<=j){
+            while(i<=j&&!isalnum(s[i])){
+                i++;
             }
-            while(end>begin&&!isalnum(s[end])){
-                end--;
+            while(i<=j&&!isalnum(s[j])){
+                j--;
             }
-            if(s[begin]==s[end]||tolower(s[begin])==tolower(s[end])){
-                begin++;
-                end--;
+            if(i>j){
+                return true;
+            }
+            if(tolower(s[i])==tolower(s[j])){
+                i++;
+                j--;
             }else{
                 return false;
             }
@@ -41,6 +42,7 @@ public:
 
 # analysis
 >本题是判断回文子串，用两个索引，分别指向字符串的开头和结尾，其中注意大小写的相等比较，还有要跳过空格和标点不好。
+这道题在牛课网上通过了但在leetcode上没有通过，"."和" "没有判断出来，我家了if(i>j)的操作，然后accept了，看来leetcode更难一点。
 
 # reference
 [[编程题]valid-palindrome][1]

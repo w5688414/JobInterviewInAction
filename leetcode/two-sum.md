@@ -9,6 +9,8 @@ Input: numbers={2, 7, 11, 15}, target=9
 Output: index1=1, index2=2
 
 # codes
+
+## s1
 ```
 class Solution {
 public:
@@ -30,9 +32,28 @@ public:
     }
 };
 ```
+## s2
+
+```
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,int> m;
+        for(int i=0;i<nums.size();i++){
+            if(m.count(target-nums[i])){
+                return {i,m[target-nums[i]]};
+            }
+            m[nums[i]]=i;
+        }
+        return {};
+    }
+};
+```
 
 # analysis
 >我也想到了用map函数，但是没想到会用这种diff的方式进行比较，看来我的火候还不够。
+
+s2方案本质还是一样，只是代码写的更简洁了。
 
 # reference
 [[编程题]two-sum][1]

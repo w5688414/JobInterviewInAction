@@ -93,9 +93,40 @@ public:
 };
 ```
 
+## s3
+```
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        if(needle.empty()){
+            return 0;
+        }
+        int m=haystack.length();
+        int n=needle.length();
+        for(int i=0;i<=m-n;i++){
+            bool flag=true;
+            for(int j=0;j<n;j++){
+                if(haystack[i+j]!=needle[j]){
+                    flag=false;
+                    break;
+                }
+            }
+            if(flag){
+                return i;
+            }
+        }
+        return -1;
+    }
+};
+```
 # analysis
 > KMP算法目前还没有调通，暴力破解版本已经AC了。
+## s3
+ 又做了一次暴力算法，KMP算法仍没有尝试。
+ 
 # reference
 [[编程题]implement-strstr][1]
+[[LeetCode] Implement strStr() 实现strStr()函数][2]
 
 [1]: https://www.nowcoder.com/questionTerminal/cc0c03ec17ad44c09d25870c301e0db7
+[2]: http://www.cnblogs.com/grandyang/p/4606696.html
