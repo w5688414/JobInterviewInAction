@@ -16,41 +16,36 @@ You should return the following matrix:
 ```
 class Solution {
 public:
-    vector<vector<int> > generateMatrix(int n) {
-        vector<vector<int>> result;
-        for(int i=0;i<n;i++){
-            vector<int> ans(n,0);
-            result.push_back(ans);
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> res(n,vector<int>(n,0));
+        int row=0;
+        int col=0;
+        int rows=n-1;
+        int cols=n-1;
+        int cnt=1;
+        while(row<=rows&&col<=cols){
+            for(int i=col;i<=cols;i++){
+                res[row][i]=cnt;
+                cnt++;
+            }
+            row++;
+            for(int i=row;i<=rows;i++){
+                res[i][cols]=cnt;
+                cnt++;
+            }
+            cols--;
+            for(int i=cols;i>=col;i--){
+                res[rows][i]=cnt;
+                cnt++;
+            }
+            rows--;
+            for(int i=rows;i>=row;i--){
+                res[i][col]=cnt;
+                cnt++;
+            }
+            col++;
         }
-        int num=1;
-        int row=n-1;
-        int row_start=0;
-        int col_start=0;
-        int col=n-1;
-        while(col_start<=col&&row_start<=row){
-            for(int i=col_start;i<=col;i++){
-                result[row_start][i]=num;
-                num++;
-            }
-            row_start++;
-            for(int i=row_start;i<=row;i++){
-                result[i][col]=num;
-                num++;
-            }
-            col--;
-            for(int i=col;i>=col_start;i--){
-                result[row][i]=num;
-                num++;
-            }
-            row--;
-            for(int i=row;i>=row_start;i--){
-                result[i][col_start]=num;
-                num++;
-            }
-            col_start++;
-        }
-        return result;
-        
+        return res;
     }
 };
 
