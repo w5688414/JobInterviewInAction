@@ -13,6 +13,8 @@ Given[1,2],[3,5],[6,7],[8,10],[12,16], insert and merge[4,9]in as[1,2],[3,10],[1
 This is because the new interval[4,9]overlaps with[3,5],[6,7],[8,10].
 
 # codes
+
+## s1
 ```
 /**
  * Definition for an interval.
@@ -46,6 +48,40 @@ public:
     }
 };
 
+```
+
+## s2
+```
+/**
+ * Definition for an interval.
+ * struct Interval {
+ *     int start;
+ *     int end;
+ *     Interval() : start(0), end(0) {}
+ *     Interval(int s, int e) : start(s), end(e) {}
+ * };
+ */
+class Solution {
+public:
+    vector<Interval> insert(vector<Interval>& intervals, Interval newInterval) {
+        vector<Interval> res;
+        int n=intervals.size();
+        int cur=0;
+        while(cur<n&&intervals[cur].end<newInterval.start){
+            res.push_back(intervals[cur++]);
+        }
+        while(cur<n&&intervals[cur].start<=newInterval.end){
+            newInterval.start=min(intervals[cur].start,newInterval.start);
+            newInterval.end=max(intervals[cur].end,newInterval.end);
+            cur++;
+        }
+        res.push_back(newInterval);
+        for(int i=cur;i<n;i++){
+            res.push_back(intervals[i]);
+        }
+        return res;
+    }
+};
 ```
 
 # analysis
