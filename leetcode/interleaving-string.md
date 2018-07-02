@@ -56,5 +56,7 @@ dp[i-1][j]表示若s3的前i+j-1个字符能够由s1前i个字符和s2的前j-1�
 
 # reference
 [[编程题]interleaving-string][1]
+[[LeetCode] Interleaving String 交织相错的字符串][2]
 
 [1]: https://www.nowcoder.com/questionTerminal/4d0f94617e454e2da23e660cded4d9e8
+[2]: http://www.cnblogs.com/grandyang/p/4298664.html
