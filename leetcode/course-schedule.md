@@ -1,72 +1,53 @@
 # problem
->There are a total of n courses you have to take, labeled from 0 to n-1.
+>S and T are strings composed of lowercase letters. In S, no letter occurs more than once.
 
-Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]
+S was sorted in some custom order previously. We want to permute the characters of T so that they match the order that S was sorted. More specifically, if x occurs before y in S, then x should occur before y in the returned string.
 
-Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?
-Example 1:
+Return any permutation of T (as a string) that satisfies this property.
 ```
-Input: 2, [[1,0]] 
-Output: true
-Explanation: There are a total of 2 courses to take. 
-             To take course 1 you should have finished course 0. So it is possible.
-```
-Example 2:
-```
-Input: 2, [[1,0],[0,1]]
-Output: false
-Explanation: There are a total of 2 courses to take. 
-             To take course 1 you should have finished course 0, and to take course 0 you should
-             also have finished course 1. So it is impossible.
+Example :
+Input: 
+S = "cba"
+T = "abcd"
+Output: "cbad"
+Explanation: 
+"a", "b", "c" appear in S, so the order of "a", "b", "c" should be "c", "b", and "a". 
+Since "d" does not appear in S, it can be at any position in T. "dcba", "cdba", "cbda" are also valid outputs.
 ```
 Note:
-- The input prerequisites is a graph represented by a list of edges, not adjacency matrices. Read more about how a graph is represented.
-- You may assume that there are no duplicate edges in the input prerequisites.
+
+- S has length at most 26, and no character is repeated in S.
+- T has length at most 200.
+- S and T consist of lowercase letters only.
+
 
 # codes
 ```
 class Solution {
 public:
-    bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
-        vector<vector<int>> graph(numCourses,vector<int>(0));
-        vector<int> inDegree(numCourses,0);
-        for(auto k:prerequisites){
-            graph[k.second].push_back(k.first);
-            inDegree[k.first]++;
+    string customSortString(string S, string T) {
+        string res="";
+        unordered_map<char,int> m;
+        for(auto a:T){
+            m[a]++;
         }
-        queue<int> que;
-        for(int i=0;i<numCourses;i++){
-            if(inDegree[i]==0){
-                que.push(i);
-            }
+        for(char a:S){
+            res+=string(m[a],a);
+            m[a]=0;
         }
-        while(!que.empty()){
-            int u=que.front();
-            que.pop();
-            for(auto v:graph[u]){
-                inDegree[v]--;
-                if(inDegree[v]==0){
-                    que.push(v);
-                }
-            }
+        for(auto a:m){
+            res+=string(a.second,a.first);
         }
-        for(int i=0;i<numCourses;i++){
-            if(inDegree[i]!=0){
-                return false;
-            }
-        }
-        return true;
+        return res;
     }
 };
 ```
 
 # analysis
->这是我刷的第一道图论的题目，我没有做出来，但是我觉得思路不错，首先，课程代表结点，课程与课程的联系代表边，我们用一个graph来存储每个课程的入度，例如graph[i]存放的是与course i有边的course，然后我们用inDegree来存放每个结点的入度。然后我们用队列先把入度为0的结点存起来，然后依次取出，队列中的值，对每个结点与只相关的边，我们都要-1，然后又重新把度为0的加入队列，直至队列为空位置。
-
-如果队列便利完，还有结点入度>0，则存在环。
+>这道题我也做不出来，原来就用一个hashmap先统计T的词频，然后按照S的顺序输出，最后把hashmap剩下的字符*词频加到res的尾部。
 
 # reference
 
-[[LeetCode] Course Schedule 课程清单][1]
+[[LeetCode] Custom Sort String 自定义排序的字符串][1]
 
-[1]: https://www.cnblogs.com/grandyang/p/4484571.html
+[1]: https://www.cnblogs.com/grandyang/p/9190143.html
