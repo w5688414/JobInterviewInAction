@@ -15,6 +15,7 @@ Note: Given n will be between 1 and 9 inclusive.
 
 # codes
 
+## s1
 ```
 class Solution {
 private:
@@ -53,20 +54,23 @@ public:
 };
 
 ```
+## s2
 ```
 class Solution {
 public:
     string getPermutation(int n, int k) {
-        string res;
-        string num = "123456789";
-        vector<int> f(n, 1);
-        for (int i = 1; i < n; ++i) f[i] = f[i - 1] * i;
-        --k;
-        for (int i = n; i >= 1; --i) {
-            int j = k / f[i - 1];
-            k %= f[i - 1];
+       string res;
+        string num="123456789";
+        vector<int> v(n,1);
+        for(int i=1;i<n;i++){
+            v[i]=v[i-1]*i;
+        }
+        k--;
+        for(int i=n;i>=1;i--){
+            int j=k/v[i-1];
+            k=k%v[i-1];
             res.push_back(num[j]);
-            num.erase(j, 1);
+            num.erase(j,1);
         }
         return res;
     }
@@ -86,6 +90,28 @@ public:
 当前集合对应的序列为1234 
 接下来将lehmer码中的每个数字当做当前序列的下标，下标0对应的集合元素为1，当前序列变成234；下标2对应的集合元素为4，当前序列变成23；下标1对应的集合元素为3，当前序列变成2；下标0对应的元素为2 
 所以所求的组合即为1432
+
+## s2
+看k = 17这种情况的每位数字如何确定，由于k = 17是转化为数组下标为16：
+
+最高位可取1,2,3,4中的一个，每个数字出现3！= 6次，所以k = 16的第一位数字的下标为16 / 6 = 2，即3被取出
+第二位此时从1,2,4中取一个，k = 16是此时的k' = 16 % (3!) = 4，而剩下的每个数字出现2！= 2次，所以第二数字的下标为4 / 2 = 2，即4被取出
+第三位此时从1,2中去一个，k' = 4是此时的k'' = 4 % (2!) = 0，而剩下的每个数字出现1！= 1次，所以第三个数字的下标为 0 / 1 = 0，即1被取出
+第四位是从2中取一个，k'' = 0是此时的k''' = 0 % (1!) = 0，而剩下的每个数字出现0！= 1次，所以第四个数字的下标为0 / 1= 0，即2被取出
+
+那么我们就可以找出规律了
+a1 = k / (n - 1)!
+k1 = k
+
+a2 = k1 / (n - 2)!
+k2 = k1 % (n - 2)!
+...
+
+an-1 = kn-2 / 1!
+kn-1 = kn-2 / 1!
+
+an = kn-1 / 0!
+kn = kn-1 % 0!
 
 ## reference
 [[编程题]permutation-sequence][1]
