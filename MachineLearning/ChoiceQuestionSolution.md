@@ -646,6 +646,16 @@ D，有序规则
 - reference
 聚类算法:凝聚层次聚类. https://blog.csdn.net/yt_sports/article/details/50456859
 
-
-
-
+## p35
+```
+说出物体检测、人脸识别、物体分割等某一领域的常见算法，并用一两句话简述其中一种算法的原理
+```
+```
+物体检测：YOLO、R-CNN、Fast R-CNN、Faster R-CNN、Mask R-CNN、SSD
+YOLO 算法直接利用一个卷积神经网络就输出物体所在的位置以及所属的类别，是一个端到端的系统，因此检测速度特别快，可以达到实时性的要求。
+```
+## p36
+```
+正则化方法
+数据增强(Data Augmentation)、L1 正则化、L2 正则化、Dropout、Drop Connect 和早停(Early stop)
+```
