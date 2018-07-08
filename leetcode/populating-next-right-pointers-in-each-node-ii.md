@@ -105,7 +105,7 @@ public:
 
 # analysis
 >大概是以前做过类似的题目，所以现在照葫芦画瓢做出来了。我用了队列做层序遍历，对于每一层，我们用链表的方式将该层每一个结点链接，不过这是O(n)的空间复杂度
-> 另一个很巧妙的用了dummy指针，空间复杂度为O(1)
+> 另一个很巧妙的用了dummy指针，空间复杂度为O(1),dummy的引用给了pre，当pre第一次赋值的时候，相当于给dummy赋值了，dummy.next永远是一层的第一个节点。过程很巧妙。
 
 ## reference
 [[编程题]populating-next-right-pointers-in-each-node-ii][1]
