@@ -25,6 +25,7 @@ Visually, the graph looks like the following:
          \_/
 ```
 # codes
+## s1
 ```
 /**
  * Definition for undirected graph.
@@ -78,9 +79,41 @@ private:
 };
 
 ```
+## s2
+```
+/**
+ * Definition for undirected graph.
+ * struct UndirectedGraphNode {
+ *     int label;
+ *     vector<UndirectedGraphNode *> neighbors;
+ *     UndirectedGraphNode(int x) : label(x) {};
+ * };
+ */
+class Solution {
+public:
+    UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
+        unordered_map<int, UndirectedGraphNode*> umap;
+        return clone(node,umap);
+    }
+    UndirectedGraphNode *clone(UndirectedGraphNode *node,unordered_map<int, UndirectedGraphNode*>& umap){
+        if(!node) return NULL;
+        if(umap.count(node->label)) return umap[node->label];
+        
+        UndirectedGraphNode *newNode=new UndirectedGraphNode(node->label);
+        umap[node->label]=newNode;
+        for(int i=0;i<node->neighbors.size();i++){
+            (newNode->neighbors).push_back(clone(node->neighbors[i],umap));
+        }
+        return newNode;
+    }
+};
+```
 
 # analysis
->BFS,map；我们先把所有的结点复制一遍，用一个map存储，键为老结点，值为新来的结点。然后宽度遍历其邻居结点，加入队列，加入队列前要判断map是否有重复，重复的忽略。然后我们遍历这个map，有相同的键值
+## s1
+BFS,map；我们先把所有的结点复制一遍，用一个map存储，键为老结点，值为新来的结点。然后宽度遍历其邻居结点，加入队列，加入队列前要判断map是否有重复，重复的忽略。然后我们遍历这个map，有相同的键值
+## s2
+这个解法是DFS的版本，相比于BFS，DFS更简洁一点。
 
 # reference
 [LeetCode 133. Clone Graph][1]
