@@ -51,6 +51,7 @@ public:
 
 # analysis
 >原来只需要遍历一遍就行了，slow指针指向要插向的位置，fast来寻找需要移动的结点。
+
 # reference
 [[编程题]partition-list][1]
 
