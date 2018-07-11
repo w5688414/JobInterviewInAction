@@ -24,39 +24,35 @@ There exist two distinct solutions to the 4-queens puzzle:
 # codes
 ```
 class Solution {
-private:
-    int x[9];
-    vector<vector<string> > result;
+    int x[19];
 public:
-    vector<vector<string> > solveNQueens(int n) {
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> res;
+        vector<string> out;
         string s1(n,'.');
-        vector<string> res;
         for(int i=0;i<n;i++){
-            res.push_back(s1);
+            out.push_back(s1);
         }
-        backTrack(0,n,res);
-        return result;
+        solve(res,out,0,n);
+        return res;
     }
-    void backTrack(int start,int n,vector<string> res){
+    void solve(vector<vector<string>>& res,vector<string> out,int start,int n){
         if(start==n){
-            result.push_back(res);
+            res.push_back(out);
             return ;
-        }else{
-            for(int i=0;i<n;i++){
-                x[start]=i;
-                if(check(start)){
-                   res[start][i]='Q';
-                   backTrack(start+1,n,res);
-                   res[start][i]='.';
-                }
+        }
+        for(int i=0;i<n;i++){
+            x[start]=i;
+            out[start][i]='Q';
+            if(check(start)){
+                solve(res,out,start+1,n);
             }
+            out[start][i]='.';
         }
     }
     bool check(int m){
         for(int i=0;i<m;i++){
-            if(abs(x[m]-x[i])==abs(m-i)||x[m]==x[i]){
-                return false;
-            }
+            if(abs(x[m]-x[i])==abs(m-i)||x[m]==x[i]) return false;
         }
         return true;
     }

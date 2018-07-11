@@ -15,6 +15,7 @@ If n = 4 and k = 2, a solution is:
 ]
 ```
 # codes
+## s1
 ```
 class Solution {
 private:
@@ -42,35 +43,34 @@ public:
     }
 };
 ```
+## s2
 ```
 class Solution {
-    vector<int> d;
-    vector<vector<int> > z;
 public:
-    vector<vector<int> > combine(int n, int k) {
-        dfs(1,k,n,0);
-        return z;
-    }
-    void dfs(int cur,int k,int n,int N)
-    {
-        if(N==k)
-            z.push_back(d);
-        else
-        {
-            int i;
-            for(i=cur;i<=n;i++)
-            {
-                d.push_back(i);
-                dfs(i+1,k,n,N+1);
-                d.pop_back();
-            }
-        }
-    }
+    vector<vector<int>> combine(int n, int k) {
+        vector<vector<int>> res;
+        vector<int> out;
+        solve(res,out,n,k,1);
+        return res;
+    }
+    void solve(vector<vector<int>>& res,vector<int> out,int n,int k,int start){
+        if(k==0||start>n){
+            if(k==0) res.push_back(out);
+            return;
+        }
+        for(int i=start;i<=n;i++){
+            out.push_back(i);
+            solve(res,out,n,k-1,i+1);
+            out.pop_back();
+        }
+    }
 };
 ```
 
 # analysis
 >回溯法，虽然模式是固定的，但是让我调试的好辛苦。
+## s2
+ 重写了一遍，感觉比以前写的更好了，所以覆盖了原有的解法。
 
 # reference
 [手把手教你<leetcode>中的回溯算法——多一点套路][1]
