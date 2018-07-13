@@ -7,6 +7,7 @@ You must do this in-place without altering the nodes' values.
 For example,
 Given{1,2,3,4}, reorder it to{1,4,2,3}.
 # codes
+## s1
 ```
 /**
  * Definition for singly-linked list.
@@ -49,9 +50,54 @@ public:
 };
 
 ```
+## s2
+```
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        if(!head||!head->next||!head->next->next){
+            return ;
+        }
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast->next&&fast->next->next){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        ListNode* mid=slow->next;
+        slow->next=NULL;
+        ListNode* last=mid;
+        ListNode* pre=NULL;
+        while(last){
+            ListNode* t=last->next;
+            last->next=pre;
+            pre=last;
+            last=t;
+        }
+        while(pre&&head){
+            ListNode* t=head->next;
+            head->next=pre;
+            pre=pre->next;
+            head->next->next=t;
+            head=t;
+        }
+    }
+};
+```
 
 # analysis
 >这一题的一大半都是自己想出来的，先用快慢指针找到中间结点，然后后面用栈进行反转，然后插入到前面的链表中。
+## s2
+第二种方法是没有用到栈，只是比前一个解法麻烦了一点，不过我觉得自己也需要锻炼一下吧。
+
 # reference
 [[编程题]reorder-list][1]
 

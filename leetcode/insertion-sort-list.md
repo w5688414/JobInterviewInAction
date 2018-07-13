@@ -1,6 +1,7 @@
 # problem
 >GSort a linked list using insertion sort.
 # codes
+## s1
 ```
 /**
  * Definition for singly-linked list.
@@ -42,11 +43,42 @@ public:
         return head;
     }
 };
-
+```
+## s2
+```
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* insertionSortList(ListNode* head) {
+        ListNode* dummy=new ListNode(-1);
+        ListNode* cur;
+        while(head){
+            ListNode* t=head->next;
+            cur=dummy;
+            while(cur->next&&cur->next->val<head->val){
+                cur=cur->next;
+            }
+            head->next=cur->next;
+            cur->next=head;
+            head=t;
+        }
+        return dummy->next;
+    }
+};
 ```
 
 # analysis
 >链表的插入排序我还是第一次做，这里需要分情况讨论，插入到头结点的话，头结点需要变，然后插入到中间某个结点，我们需要遍历找到那个结点的前面和后面的结点，然后插入。
+## s2
+用了额外变量dummy来实现，相对来说实现起来就简单多了。
+
 # reference
 [[编程题]insertion-sort-list][1]
 
