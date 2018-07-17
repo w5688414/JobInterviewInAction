@@ -16,3 +16,5 @@
 [15].面试：机器学习--推荐算法. https://blog.csdn.net/u013713010/article/details/44905669
 [16].说说春招实习的京东面试，算法岗. https://www.nowcoder.com/discuss/75301?type=0&order=0&pos=136&page=1
 [17]. Deep learning：四十六(DropConnect简单理解). https://www.cnblogs.com/tornadomeet/p/3430312.html
+[18]: Going Deeper into Regression Analysis with Assumptions, Plots & Solutions. https://www.analyticsvidhya.com/blog/2016/07/deeper-regression-analysis-assumptions-plots-solutions/
+[19]:Derivation of the Normal Equation for linear regression. https://eli.thegreenplace.net/2014/derivation-of-the-normal-equation-for-linear-regression/

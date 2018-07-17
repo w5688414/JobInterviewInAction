@@ -12,6 +12,7 @@ Your algorithm should run in O(n2) complexity.
 Follow up: Could you improve it to O(n log n) time complexity?
 
 # codes
+## s1
 ```
 class Solution {
 public:
@@ -30,6 +31,33 @@ public:
             max_len=max(max_len,dp[i]);
         }
         return max_len;
+    }
+};
+```
+## s2
+```
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        if(nums.size()==0){
+            return 0;
+        }
+        vector<int> v;
+        v.push_back(nums[0]);
+        for(int i=1;i<nums.size();i++){
+            if(nums[i]>v.back()){
+                v.push_back(nums[i]);
+            }else{
+                for(int j=0;j<v.size();j++){ //这里可以二分查找，然后算法的效率为O(nlogn)
+                    if(nums[i]<=v[j]){
+                        v[j]=nums[i];
+                        break;
+                    }
+
+                }
+            }
+        }
+        return v.size();
     }
 };
 ```
