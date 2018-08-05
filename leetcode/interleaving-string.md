@@ -10,6 +10,7 @@ When s3 ="aadbbcbcac", return true.
 When s3 ="aadbbbaccc", return false.
 
 # codes
+## s1
 ```
 class Solution {
 public:
@@ -39,9 +40,39 @@ public:
 };
 
 ```
+## s2
+```
+class Solution {
+public:
+    bool isInterleave(string s1, string s2, string s3) {
+        int n1=s1.length();
+        int n2=s2.length();
+        int n3=s3.length();
+        if(n1+n2!=n3){
+            return false;
+        }
+        vector<vector<bool>> dp(n1+1,vector<bool>(n2+1,false));
+        for(int i=0;i<=n1;i++){
+            for(int j=0;j<=n2;j++){
+                if(i==0&&j==0){
+                    dp[i][j]=true;
+                }else if(i==0){
+                    dp[i][j]=dp[i][j-1]&&s2[j-1]==s3[i+j-1];
+                }else if(j==0){
+                    dp[i][j]=dp[i-1][j]&&s1[i-1]==s3[i+j-1];
+                }else{
+                    dp[i][j]=(dp[i-1][j]&&s1[i-1]==s3[i+j-1])||(dp[i][j-1]&&s2[j-1]==s3[i+j-1]);
+                }
+            }
+        }
+        return dp[n1][n2];
+    }
+};
+```
 
 # analysis
->动态规划，不懂
+## s1
+动态规划，不懂
 s3是由s1和s2交织生成的，意味着s3由s1和s2组成，在s3中s1和s2字符的顺序是不能变化的，和子序列题型类似，这种题我们一般是用动态规划来解。
 1. 设dp[i][j]表示s3的前i+j个字符可以由s1的前i个字符和s2的前j个字符交织而成。
 2. 状态转移方程：有两种情况
@@ -53,10 +84,16 @@ dp[i-1][j]表示若s3的前i+j-1个字符能够由s1前i-1个字符和s2的前j�
 dp[i][j]= dp[i][j-1] && s2[j - 1] == s3[i + j - 1]
 dp[i-1][j]表示若s3的前i+j-1个字符能够由s1前i个字符和s2的前j-1个字符交织而成，那么只需要s2的第j个字符与s3的第i+j个字符相等，那么dp[i][j]=true;
 
+## s2
+重新做了一遍，发现理解起来没有以前那么困难了，后面应该尝试做一下。
 
 # reference
 [[编程题]interleaving-string][1]
+
 [[LeetCode] Interleaving String 交织相错的字符串][2]
+
+[97. Interleaving String][3]
 
 [1]: https://www.nowcoder.com/questionTerminal/4d0f94617e454e2da23e660cded4d9e8
 [2]: http://www.cnblogs.com/grandyang/p/4298664.html
+[3]: https://leetcode.com/problems/interleaving-string/solution/
