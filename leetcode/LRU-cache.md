@@ -21,6 +21,7 @@ cache.get(4);       // returns 4
 ```
 
 # codes
+## s1
 ```
 class LRUCache {
 private:
@@ -63,6 +64,116 @@ public:
  */
 ```
 
+## s2
+```
+// 连表的形式来储存；
+// 链表头为最早入表的节点，链表尾为最新的节点；
+struct MyListNode{
+	int key;
+	int val;
+	MyListNode* next;
+	MyListNode* pre;
+	MyListNode(int k, int v):key(k), val(v), next(NULL), pre(NULL){}
+};
+class LRUCache{
+public:
+ 
+	LRUCache(int capacity):cap(capacity), nodeNum(0), pHead(NULL), pTail(NULL) {
+	}
+ 
+	int get(int key) {
+		if(pHead == NULL)
+		{
+			return -1;
+		}
+		MyListNode* pNode = pHead;
+		while(pNode != NULL)
+		{
+			if(pNode->key == key)
+			{
+				int val = pNode->val;
+				DeleteFromList(pNode);
+				AddToList(pNode);
+				return val;
+			}
+			pNode = pNode->next;
+		}
+ 
+		return -1;
+	}
+ 
+	void set(int key, int value) {
+		MyListNode* pNode = pHead;
+		while(pNode != NULL)
+		{
+			if(pNode->key == key)
+			{
+				pNode->val = value;
+				DeleteFromList(pNode);
+				AddToList(pNode);
+				return;
+			}
+			pNode = pNode->next;
+		}
+ 
+		pNode = new MyListNode(key, value);
+		AddToList(pNode);
+	}
+	void AddToList(MyListNode* pNode){
+		if(nodeNum == cap)
+		{
+			MyListNode* pTmp = pHead;
+			pHead = pHead->next;
+			DeleteFromList(pTmp);
+			delete pTmp;
+			AddToList(pNode);
+		}
+		else
+		{
+			++nodeNum;
+			if(nodeNum == 1)
+			{
+				pHead = pNode;
+				pTail = pNode;
+			}
+			else
+			{
+				pTail->next = pNode;
+				pNode->pre = pTail;
+				pNode->next = NULL;
+				pTail = pNode;
+			}
+		}
+	}
+	void DeleteFromList(MyListNode* pNode){
+		MyListNode* pPre = pNode->pre;
+		MyListNode* pNext = pNode->next;
+		nodeNum--;
+		if(pPre == NULL)
+		{
+			pHead = pNext;
+		}
+		else
+		{
+			pPre->next = pNext;
+		}
+ 
+		if(pNext == NULL)
+		{
+			pTail = pPre;
+		}
+		else
+		{
+			pNext->pre = pPre;
+		}
+	}
+	MyListNode* pHead;
+	MyListNode* pTail;
+	int nodeNum;
+	int cap;
+};
+```
+
 # analysis
 >如果来了一个get请求, 我们仍然先去查hash表, 如果key存在hash表中, 那么需要将这个结点在链表的中的位置移动到链表首部.否则返回-1.
 另外一个非常关键的降低时间复杂度的方法是在hash中保存那个key在链表中对应的指针, 我们知道链表要查找一个结点的时间复杂度是O(n), 所以当我们需要移动一个结点到链表首部的时候, 如果直接在链表中查询那个key所对于的结点, 然后再移动, 这样时间复杂度将会是O(n), 而一个很好的改进方法是在hash表中存储那个key在链表中结点的指针, 这样就可以在O(1)的时间内移动结点到链表首部.
@@ -75,8 +186,8 @@ STL技巧：
 
 # reference
 [[leetcode] 146. LRU Cache 解题报告][1]
-
+[LRU的C++实现][2] 
 
 [1]: https://blog.csdn.net/qq508618087/article/details/50995188
-
+[2]: https://blog.csdn.net/tinyway/article/details/24536327
 

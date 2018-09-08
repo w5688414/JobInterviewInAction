@@ -62,3 +62,14 @@ public class Main {
 		sc.close();
 	}
 }
+
+5
+1, 1
+1, 1
+2, 0
+0, 0
+3, 0
+singer_周杰|周杰伦|刘德华|王力宏;song_冰雨|北京欢迎你|七里香;actor_周杰伦|孙俪
+请播放周杰伦的七里香给我听
+
+请播放 周杰伦/singer,actor 的 七里香/song 给我听
