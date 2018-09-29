@@ -73,3 +73,16 @@ singer_周杰|周杰伦|刘德华|王力宏;song_冰雨|北京欢迎你|七里�
 请播放周杰伦的七里香给我听
 
 请播放 周杰伦/singer,actor 的 七里香/song 给我听
+
+5 3
+1 4 2 3 5
+5
+
+   i buy an apple watch from the aPple store, by the way I also like eating apple.
+
+2 3
+5 10
+10 6
+20 10
+30 15
+9
