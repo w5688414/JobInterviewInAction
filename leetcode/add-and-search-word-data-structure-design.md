@@ -77,8 +77,9 @@ private:
 ```
 
 # analysis
->这道题用了wordtree的结构，如果不是刷leetcode，我可能就不了解这个东西了，希望以后我能独立的写出来。
-
+- 这是一个wordtree，没什么好说的，记住它的思想和做法
+- 插入的时候根据插入的字符串一个一个的遍历，如果没找到相应的节点，就继续创建该字符节点。由于只包含a~z，所以创建子节点的时候包含26个值就行了。
+- 查找的时候递归，如果满足条件返回true，其他情况都为false。注意看代码中对.的处理
 # reference
 [[LeetCode] Add and Search Word - Data structure design 添加和查找单词-数据结构设计][1]
 
