@@ -41,6 +41,6 @@ public:
 - 我们用一个哈希表建立子数组之和跟结尾位置的坐标之间的映射。如果某个子数组之和在哈希表里存在了，说明当前子数组减去哈希表中存的那个子数字，得到的结果是中间一段子数组之和，必然为0，说明0和1的个数相等，我们更新结果res
 
 # reference
-[[LeetCode] Contains Duplicate II 包含重复值之二][1]
+[[LeetCode] Contiguous Array 邻近数组][1]
 
-[1]: http://www.cnblogs.com/grandyang/p/4539680.html
+[1]: https://www.cnblogs.com/grandyang/p/6529857.html

@@ -41,10 +41,10 @@ public:
 ```
 
 # analysis
->这个思想还不错，很好的利用了快慢指针和递归，快慢指针负责每次找根结点，然后建立根结点，递归负责建树，很巧妙。
+>
 
 # reference
 
-[[编程题]convert-sorted-list-to-binary-search-tree][1]
+[[LeetCode] Decode Ways 解码方法][1]
 
-[1]: https://www.nowcoder.com/questionTerminal/86343165c18a4069ab0ab30c32b1afd0
+[1]: https://www.cnblogs.com/grandyang/p/4313384.html

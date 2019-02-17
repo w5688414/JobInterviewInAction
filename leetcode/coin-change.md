@@ -35,7 +35,7 @@ public:
 
 # analysis
 >这是一道动态规划的题目，我现在也要尝试写动态规划的方法，发现代码好简单，关键是要注意很多细节，dp[i]表示凑齐钱数i所需要的最小硬币数，dp[i]就是当前i最小钱数和i-coin的最小硬币数的最小值。
-
+即：dp[i]=min(dp[i-coin]+1,dp[i]); 
 # reference
 [leetcode 322. Coin Change-硬币交换|动态规划][1]
 

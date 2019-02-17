@@ -28,31 +28,45 @@ Output:
 ```
 # codes
 ```
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
 class Solution {
 public:
-    string findReplaceString(string S, vector<int>& indexes, vector<string>& sources, vector<string>& targets) {
-        vector<pair<int,int>> v;
-        for(int i=0;i<indexes.size();i++){
-            v.push_back(make_pair(indexes[i],i));
+    int findBottomLeftValue(TreeNode* root) {
+        int res;
+        int mx=0;
+        int cnt=1;
+        solve(root,mx,cnt,res);
+        return res;
+    }
+    void solve(TreeNode* root,int& mx,int cnt,int& res){
+        if(!root){
+            return;
         }
-        sort(v.rbegin(),v.rend());
-        for(auto p:v){
-            int i=p.first;
-            string s=sources[p.second];
-            string t=targets[p.second];
-            if(S.substr(i,s.length())==s){
-                S=S.substr(0,i)+t+S.substr(i+s.length());
-            }
-        }
-        return S;
+        if(cnt>mx){
+            mx=cnt;
+            res=root->val;
+        }   
+        solve(root->left,mx,cnt+1,res);
+        solve(root->right,mx,cnt+1,res);
     }
 };
 ```
 
 # analysis
->这道题目从前往后替换会很麻烦，因为替换后长度发生变化；后面发现别人是从后往前替换的，真是思维巧妙，佩服佩服。
+- 题目的意思是：求一棵二叉树中最后一行，最左边的叶子结点。
+
+- 树的问题就是递归，然后是先序遍历，由于先序遍历遍历的顺序是根-左-右，所以每一行最左边的结点肯定最先遍历到，那么由于是新一行，那么当前深度肯定比之前的最大深度大，所以我们可以更新最大深度为当前深度，结点值res为当前结点值，这样在遍历到该行其他结点时就不会更新结果res了。
+
 
 # reference
-[833. Find And Replace in String][1]
+[[LeetCode] Find Bottom Left Tree Value 寻找最左下树结点的值][1]
 
-[1]: https://leetcode.com/problems/find-and-replace-in-string/discuss/130587/C++JavaPython-Replace-S-from-right-to-left
+[1]: https://www.cnblogs.com/grandyang/p/6405128.html

@@ -1,53 +1,66 @@
-# problem
->S and T are strings composed of lowercase letters. In S, no letter occurs more than once.
+There are a total of n courses you have to take, labeled from 0 to n-1.
 
-S was sorted in some custom order previously. We want to permute the characters of T so that they match the order that S was sorted. More specifically, if x occurs before y in S, then x should occur before y in the returned string.
+Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]
 
-Return any permutation of T (as a string) that satisfies this property.
+Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?
+
+Example 1:
 ```
-Example :
-Input: 
-S = "cba"
-T = "abcd"
-Output: "cbad"
-Explanation: 
-"a", "b", "c" appear in S, so the order of "a", "b", "c" should be "c", "b", and "a". 
-Since "d" does not appear in S, it can be at any position in T. "dcba", "cdba", "cbda" are also valid outputs.
+Input: 2, [[1,0]] 
+Output: true
+Explanation: There are a total of 2 courses to take. 
+             To take course 1 you should have finished course 0. So it is possible.
+```
+Example 2:
+```
+Input: 2, [[1,0],[0,1]]
+Output: false
+Explanation: There are a total of 2 courses to take. 
+             To take course 1 you should have finished course 0, and to take course 0 you should
+             also have finished course 1. So it is impossible.
 ```
 Note:
 
-- S has length at most 26, and no character is repeated in S.
-- T has length at most 200.
-- S and T consist of lowercase letters only.
-
+1. The input prerequisites is a graph represented by a list of edges, not adjacency matrices. Read more about how a graph is represented.
+2. You may assume that there are no duplicate edges in the input prerequisites.
 
 # codes
 ```
 class Solution {
 public:
-    string customSortString(string S, string T) {
-        string res="";
-        unordered_map<char,int> m;
-        for(auto a:T){
-            m[a]++;
+    bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
+        vector<vector<int>> graph(numCourses,vector<int>(0));
+        vector<int> inDegree(numCourses,0);
+        for(auto k:prerequisites){
+            graph[k.second].push_back(k.first);
+            inDegree[k.first]++;
         }
-        for(char a:S){
-            res+=string(m[a],a);
-            m[a]=0;
+        queue<int> que;
+        for(int i=0;i<numCourses;i++){
+            if(inDegree[i]==0){
+                que.push(i);
+            }
         }
-        for(auto a:m){
-            res+=string(a.second,a.first);
+        while(!que.empty()){
+            int u=que.front();
+            que.pop();
+            for(auto v:graph[u]){
+                inDegree[v]--;
+                if(inDegree[v]==0){
+                    que.push(v);
+                }
+            }
         }
-        return res;
+        for(int i=0;i<numCourses;i++){
+            if(inDegree[i]!=0){
+                return false;
+            }
+        }
+        return true;
     }
 };
 ```
-
-# analysis
->这道题我也做不出来，原来就用一个hashmap先统计T的词频，然后按照S的顺序输出，最后把hashmap剩下的字符*词频加到res的尾部。
+# analysis 
 
 # reference
-
-[[LeetCode] Custom Sort String 自定义排序的字符串][1]
-
-[1]: https://www.cnblogs.com/grandyang/p/9190143.html
+[]

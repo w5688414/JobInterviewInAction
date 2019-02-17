@@ -51,6 +51,6 @@ public:
 这道题我没有推出来怎么搜索，看来还需要深入理解里面的内容。
 
 # reference
-[[LeetCode] H-Index II 求H指数之二[1]
+[[LeetCode] H-Index II 求H指数之二][1]
 
 [1]: http://www.cnblogs.com/grandyang/p/4782695.html

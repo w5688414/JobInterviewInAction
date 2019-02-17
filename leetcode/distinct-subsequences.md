@@ -34,29 +34,32 @@ public:
 ```
 class Solution {
 public:
-    int numDistinct(string S, string T) {
-       if(S.size()==0||T.size()==0)
-           return 0;
-        if(S.size()<T.size()){
+    int numDistinct(string s, string t) {
+        int m=s.length();
+        int n=t.length();
+        if(m<n){
             return 0;
         }
-        int dp[S.size()+1][T.size()+1];
-        for(int i=0;i<=T.size();i++){
-            dp[0][i]=0;
-        }
-        for(int i=0;i<=S.size();i++){
-            dp[i][0]=1;
-        }
-        for(int i=1;i<=S.length();i++){
-            for(int j=1;j<=T.length();j++){
-                if(S[i-1]==T[j-1]){
-                    dp[i][j]=dp[i-1][j-1]+dp[i-1][j];
+        vector<vector<long>> dp(m+1,vector<long>(n+1,0));
+        for(int i=0;i<=m;i++){
+            for(int j=0;j<=n;j++){
+                if(i==0&&j==0){
+                    dp[i][j]=1;
+                }else if(i==0){
+                    dp[i][j]=0;
+                }else if(j==0){
+                    dp[i][j]=1;
                 }else{
-                    dp[i][j]=dp[i-1][j];
+                    if(s[i-1]==t[j-1]){
+                        dp[i][j]=dp[i-1][j-1]+dp[i-1][j];
+                    }else {
+                        dp[i][j]=dp[i-1][j];
+                    }
                 }
             }
         }
-        return dp[S.length()][T.length()];
+        return dp[m][n];
+        
     }
 };
 ```

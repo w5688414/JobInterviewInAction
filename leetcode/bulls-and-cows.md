@@ -50,7 +50,8 @@ public:
 ```
 
 # analysis
->这道题我知道用hash表，但hash表应该村secret和guess相应为止不等的数量。然后再便利一遍统计cow的数量，然后输出。看来我还是太年轻了。
+>这道题用hash表，但hash表应该存secret和guess相应位置不等的数量。然后再遍历一遍统计cow的数量，然后输出。想明白了就很简单。
+
 
 # reference
 [[LeetCode] Bulls and Cows 公母牛游戏][1]
