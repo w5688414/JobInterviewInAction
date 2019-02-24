@@ -40,12 +40,45 @@ public:
 # analysis
 >说实话，我还真不大懂这一题，留着慢慢看吧。今后找个机会把这些东西全都整理下来。
 
+```
+1 0 1 0 0
+1 0 1 1 1
+1 1 1 1 1
+1 0 0 1 0
+```
+step 1
+```
+1 0 1 0 0
+1 0 1 1 1
+1 1 1 1 1
+1 0 0 1 0    v=1,0,1,0,0
+```
+
+step 2
+```
+1 0 1 0 0
+1 0 1 1 1
+1 1 1 1 1
+1 0 0 1 0    v=2,0,2,1,1
+```
+
+step 3
+```
+1 0 1 0 0
+1 0 1 1 1
+1 1 1 1 1
+1 0 0 1 0    v=3,1,3,2,2
+```
+step 4
+```
+1 0 1 0 0
+1 0 1 1 1
+1 1 1 1 1
+1 0 0 1 0    v=4,1,3,3,2
+```
 
 # reference
 [[LeetCode] Maximal Square 最大正方形][1]
-[[LeetCode] 01矩阵中最大矩形 Maximal Rectangle][2]
-[Leetcode Maximal Rectangle][3]
+
 
 [1]: https://www.cnblogs.com/grandyang/p/4550604.html
-[2]: https://blog.csdn.net/jiyanfeng1/article/details/8068676
-[3]: https://www.cnblogs.com/easonliu/p/3657489.html

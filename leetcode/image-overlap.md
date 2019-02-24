@@ -1,5 +1,4 @@
 # problem
->
 Two images A and B are given, represented as binary, square matrices of the same size.  (A binary matrix has only 0s and 1s as values.)
 
 We translate one image however we choose (sliding it left, right, up, or down any number of units), and place it on top of the other image.  After, the overlap of this translation is the number of positions that have a 1 in both images.
@@ -56,6 +55,11 @@ public:
 
 # analysis
 > 这道题我不怎么理解，希望我再刷一次的时候能够理解啦，哈哈哈。
+假设A和B的索引范围都是[0,N*N-1]
+1. 遍历A，如果值为1，则把对应的坐标存到LA中。
+2. 遍历B，如果值为1，则把对应的坐标存到LB中。
+3. 遍历LA和LB，统计count[i-j]，如果我们滑动使得A[i]覆盖B[i],我们可以获得1分。
+4. 遍历count,返回最大值即为所求。
 
 # reference
 [835. Image Overlap][1]

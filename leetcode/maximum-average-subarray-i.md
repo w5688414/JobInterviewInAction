@@ -40,6 +40,6 @@ public:
 >
 
 # reference
-[[LeetCode] Maximum Length of Repeated Subarray 最长的重复子数组][1]
+[[LeetCode] Maximum Average Subarray I 子数组的最大平均值][1]
 
-[1]: https://www.cnblogs.com/grandyang/p/7801533.html
+[1]: https://www.cnblogs.com/grandyang/p/7294585.html
