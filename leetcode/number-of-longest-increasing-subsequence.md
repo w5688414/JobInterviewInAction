@@ -69,3 +69,10 @@ public:
 [1]: http://www.cnblogs.com/yaoyudadudu/p/9197364.html
 
 
+Alex Hanson, Koutilya PNVR, Sanjukta Krishnagopal, Larry Davis:
+Bidirectional Convolutional LSTM for the Detection of Violence in Videos. ECCV Workshops (2) 2018: 280-295
+
+Guang Ting Foo, Kam Meng Goh: Violence action recognition using region proposal in region convolution neural network. Intelligent Decision Technologies 13(1): 49-65 (2019)
+
+Jianan Li, Xiaodan Liang, Yunchao Wei, Tingfa Xu, Jiashi Feng, Shuicheng Yan:
+Perceptual Generative Adversarial Networks for Small Object Detection. CVPR 2017: 1951-1959
