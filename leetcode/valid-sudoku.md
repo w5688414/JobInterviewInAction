@@ -52,7 +52,7 @@ public:
 ```
 
 # analysis
->这是一个经典的问题，我也做不出来，大概是功力不够的缘故吧，努力加油。 one time you will be good enough.没遍历到一个数字，我们需要验证该数字在其对应的行是否合法，列是否合法，在小九宫格里面是否合法。
+>这是一个经典的问题，我也做不出来，大概是功力不够的缘故吧，努力加油。 one time you will be good enough.每遍历到一个数字，我们需要验证该数字在其对应的行是否合法，列是否合法，在小九宫格里面是否合法。
 
 # reference
 [[编程题]valid-sudoku][1]
